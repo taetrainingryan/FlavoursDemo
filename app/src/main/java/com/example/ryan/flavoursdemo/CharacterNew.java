@@ -6,11 +6,12 @@ package com.example.ryan.flavoursdemo;
 
 public class CharacterNew {
 
-    String name, desc;
+    String name, desc, image;
 
-    public CharacterNew(String name, String desc) {
+    public CharacterNew(String name, String desc, String image) {
         this.name = name;
         this.desc = desc;
+        this.image = image;
     }
 
     public String getName() {
@@ -27,5 +28,13 @@ public class CharacterNew {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

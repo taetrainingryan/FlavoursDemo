@@ -7,9 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ryan.flavoursdemo.dummy.DummyContent;
+import com.squareup.picasso.Picasso;
 
 /**
  * A fragment representing a single Item detail screen.
@@ -24,11 +27,12 @@ public class ItemDetailFragment extends Fragment {
      */
     public static final String ARG_ITEM_NAME = "item_name";
     public static final String ARG_ITEM_TEXT = "item_text";
+    public static final String ARG_ITEM_IMAGE = "item_image";
 
     /**
      * The dummy content this fragment is presenting.
      */
-    private String mName, mText;
+    private String mName, mText, mImage;
 
 
     /**
@@ -50,6 +54,7 @@ public class ItemDetailFragment extends Fragment {
             Bundle bundle = getArguments();
             mName = bundle.getString(ARG_ITEM_NAME);
             mText = bundle.getString(ARG_ITEM_TEXT);
+            mImage = bundle.getString(ARG_ITEM_IMAGE);
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
@@ -64,10 +69,17 @@ public class ItemDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.item_detail, container, false);
 
-
             ((TextView) rootView.findViewById(R.id.item_detail)).setText(mText);
+            rootView.findViewById(R.id.ivImage);
 
+            if(mImage!=""){
+                Picasso.with(getContext()).load(mImage).into((ImageView) rootView.findViewById(R.id.ivImage));
+            }
 
+            else{
+                Toast.makeText(getContext(), "No image found for this character.", Toast.LENGTH_SHORT).show();
+            }
+        
         return rootView;
     }
 }

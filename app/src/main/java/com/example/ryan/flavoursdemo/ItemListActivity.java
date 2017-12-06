@@ -104,11 +104,12 @@ public class ItemListActivity extends AppCompatActivity {
                         //Toast.makeText(ItemListActivity.this, characters.get(0).getText(), Toast.LENGTH_SHORT).show();
 
                         characters = new ArrayList<CharacterNew>();
+
                         for (Character n: tempcharacters){
 
                             String[] stuff = n.getText().split("-", 2);
 
-                            CharacterNew a = new CharacterNew(stuff[0], stuff[1]);
+                            CharacterNew a = new CharacterNew(stuff[0], stuff[1], n.getIcon().getURL());
 
                             characters.add(a);
                         }
@@ -145,11 +146,11 @@ public class ItemListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //DummyContent.DummyItem item = (DummyContent.DummyItem) view.getTag();
 
-
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
                     arguments.putString(ItemDetailFragment.ARG_ITEM_NAME, mValues.get((int)view.getTag()).getName());
                     arguments.putString(ItemDetailFragment.ARG_ITEM_TEXT, mValues.get((int)view.getTag()).getDesc());
+                    arguments.putString(ItemDetailFragment.ARG_ITEM_IMAGE, mValues.get((int)view.getTag()).getImage());
                     ItemDetailFragment fragment = new ItemDetailFragment();
                     fragment.setArguments(arguments);
                     mParentActivity.getSupportFragmentManager().beginTransaction()
@@ -160,6 +161,7 @@ public class ItemListActivity extends AppCompatActivity {
                     Intent intent = new Intent(context, ItemDetailActivity.class);
                     intent.putExtra(ItemDetailFragment.ARG_ITEM_NAME, mValues.get((int)view.getTag()).getName());
                     intent.putExtra(ItemDetailFragment.ARG_ITEM_TEXT, mValues.get((int)view.getTag()).getDesc());
+                    intent.putExtra(ItemDetailFragment.ARG_ITEM_IMAGE, mValues.get((int)view.getTag()).getImage());
 
                     context.startActivity(intent);
                 }
